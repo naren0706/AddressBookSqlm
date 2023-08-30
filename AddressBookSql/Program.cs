@@ -5,7 +5,7 @@
         static void Main(string[] args)
         {
             Operation operation = new Operation();
-            operation.CreateDataBase();
+            operation.CreateTable();
         }
     }
 }

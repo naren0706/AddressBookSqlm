@@ -26,5 +26,32 @@ namespace AddressBookSql
                 con.Close();
             }
         }
+
+        private void Connection()
+        {
+            string connectionstr = "data source = (localdb)\\MSSQLLocalDB; initial catalog = EmployeeManagement; integrated security = true";
+            con = new SqlConnection(connectionstr);
+        }
+        public void CreateTable()
+        {
+            try
+            {
+                Connection();
+                string query = "create Table address_book(Id int primary key identity(1,1),FirstName varchar(max) not null,LastNames varchar(max) not null,Address varchar(max) not null,City varchar(max) not null,State varchar(max) not null,Zip varchar(max) not null,PhoneNumber varchar(max) not null,);";
+
+                SqlCommand cmd = new SqlCommand(query, con);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                Console.WriteLine("Table Created Sucessfully");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Table is not created ");
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }
