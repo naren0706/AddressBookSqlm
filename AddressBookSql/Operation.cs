@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace AddressBookSql
@@ -31,7 +32,7 @@ namespace AddressBookSql
 
         private void Connection()
         {
-            string connectionstr = "data source = (localdb)\\MSSQLLocalDB; initial catalog = EmployeeManagement; integrated security = true";
+            string connectionstr = "data source = (localdb)\\MSSQLLocalDB; initial catalog = AddressBook; integrated security = true";
             con = new SqlConnection(connectionstr);
         }
         public void CreateTable()
@@ -39,7 +40,7 @@ namespace AddressBookSql
             try
             {
                 Connection();
-                string query = "create Table address_book(Id int primary key identity(1,1),FirstName varchar(max) not null,LastNames varchar(max) not null,Address varchar(max) not null,City varchar(max) not null,State varchar(max) not null,Zip varchar(max) not null,PhoneNumber varchar(max) not null,);";
+                string query = "create Table address_book(Id int primary key identity(1,1),FirstName varchar(max) not null,LastNames varchar(max) not null,Address varchar(max) not null,City varchar(max) not null,State varchar(max) not null,Zip varchar(max) not null,PhoneNumber varchar(max) not null,Email varchar(max) not null);";
 
                 SqlCommand cmd = new SqlCommand(query, con);
                 con.Open();
@@ -77,8 +78,38 @@ namespace AddressBookSql
                     Email = "azasf@gmail.com"
                 };
                 list.Add(details);
+                AddEmployeeDetails(details);
             }
             return list;
+        }
+
+        public void AddEmployeeDetails(AddressBook details)
+        {
+            try
+            {
+                Connection();
+                SqlCommand com = new SqlCommand("AddAddressBookDetail", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@FirstName", details.FirstName);
+                com.Parameters.AddWithValue("@LastName", details.LastName);
+                com.Parameters.AddWithValue("@Address", details.Address);
+                com.Parameters.AddWithValue("@City", details.City);
+                com.Parameters.AddWithValue("@State", details.State);
+                com.Parameters.AddWithValue("@Zip", details.Zip);
+                com.Parameters.AddWithValue("@PhoneNumber", details.PhoneNumber);
+                com.Parameters.AddWithValue("@Email", details.Email);
+                con.Open();
+                var i = com.ExecuteScalar();
+                Console.WriteLine("Database Added");
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
         }
     }
 }

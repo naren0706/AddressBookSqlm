@@ -7,8 +7,9 @@ namespace AddressBookSql
         public static void Main(string[] args)
         {
             Operation operation = new Operation();
-            operation.CreateTable();
-            List<AddressBook> list = operation.CreateRecords();           
-        }        
+            //operation.CreateTable();
+            List<AddressBook> list = operation.CreateRecords();
+            operation.CreateRecords();
+        }
     }
 }
