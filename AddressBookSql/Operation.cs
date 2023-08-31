@@ -55,5 +55,30 @@ namespace AddressBookSql
                 con.Close();
             }
         }
+
+        public List<AddressBook> CreateRecords()
+        {
+            List<AddressBook> list = new List<AddressBook>();
+            string[] city = { "Chennai", "Coimbatore", "Madurai" };
+            string[] state = { "TamilNadu", "Kerala", "Delhi" };
+            string[] zip = { "641654", "600004", "600032" };
+
+            for (int i = 0; i < 50; i++)
+            {
+                AddressBook details = new AddressBook()
+                {
+                    FirstName = "name" + i,
+                    LastName = "name" + i,
+                    Address = "street" + i,
+                    City = city[R.Next(3)],
+                    State = state[R.Next(3)],
+                    Zip = zip[R.Next(3)],
+                    PhoneNumber = "9" + R.Next(10000000, 999999999),
+                    Email = "azasf@gmail.com"
+                };
+                list.Add(details);
+            }
+            return list;
+        }
     }
 }
