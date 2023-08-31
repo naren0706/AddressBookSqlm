@@ -21,7 +21,9 @@ namespace AddressBookSql
                 PhoneNumber = "999999999",
                 Email = "azasf@gmail.com"
             };
-            operation.UpdateDetails(book);
+            //operation.UpdateDetails(book);
+            operation.GroupByCity();
+            operation.GroupByState();
         }
     }
 }

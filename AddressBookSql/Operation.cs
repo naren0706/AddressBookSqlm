@@ -8,7 +8,6 @@ namespace AddressBookSql
     {
         public static Random R = new Random();
         private SqlConnection con;
-
         public void CreateDataBase()
         {
             con = new SqlConnection("data source = (localdb)\\MSSQLLocalDB; initial catalog=master; integrated Security= true");
@@ -29,7 +28,6 @@ namespace AddressBookSql
                 con.Close();
             }
         }
-
         private void Connection()
         {
             string connectionstr = "data source = (localdb)\\MSSQLLocalDB; initial catalog = AddressBook; integrated security = true";
@@ -56,7 +54,6 @@ namespace AddressBookSql
                 con.Close();
             }
         }
-
         public List<AddressBook> CreateRecords()
         {
             List<AddressBook> list = new List<AddressBook>();
@@ -137,6 +134,43 @@ namespace AddressBookSql
             finally
             {
                 con.Close();
+            }
+        }
+
+        internal void GroupByCity()
+        {
+            Connection();
+
+            SqlCommand com = new SqlCommand("GroupByCity", con);
+
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            con.Close();
+            foreach (DataRow dr in dt.Rows)
+            {
+                Console.Write("values for " + Convert.ToString(dr["City"]) + " is");
+                Console.WriteLine(" Count : " + Convert.ToString(dr["count"]));
+            }
+        }
+        internal void GroupByState()
+        {
+            Connection();
+
+            SqlCommand com = new SqlCommand("GroupByState", con);
+
+            com.CommandType = CommandType.StoredProcedure;
+            SqlDataAdapter da = new SqlDataAdapter(com);
+            DataTable dt = new DataTable();
+            con.Open();
+            da.Fill(dt);
+            con.Close();
+            foreach (DataRow dr in dt.Rows)
+            {
+                Console.Write("values for " + Convert.ToString(dr["State"]) + " is");
+                Console.WriteLine(" Count : " + Convert.ToString(dr["count"]));
             }
         }
     }
