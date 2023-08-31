@@ -1,11 +1,13 @@
-﻿namespace AddressBookSql
+﻿using System.Collections.Generic;
+
+namespace AddressBookSql
 {
     class Program
     {
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             Operation operation = new Operation();
-            operation.CreateTable();
-        }
+            operation.CreateTable();          
+        }        
     }
 }

@@ -1,9 +1,11 @@
-﻿using System.Data.SqlClient;
+﻿using System.Collections.Generic;
+using System.Data.SqlClient;
 
 namespace AddressBookSql
 {
     internal class Operation
     {
+        public static Random R = new Random();
         private SqlConnection con;
 
         public void CreateDataBase()
