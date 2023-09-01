@@ -173,5 +173,67 @@ namespace AddressBookSql
                 Console.WriteLine(" Count : " + Convert.ToString(dr["count"]));
             }
         }
+
+        internal void GetCitySize()
+        {
+            try
+            {
+                Connection();
+                SqlCommand com = new SqlCommand("CountinCity", con);
+                com.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                int i = com.ExecuteNonQuery();
+                List<AddressBook> contacts = new List<AddressBook>();
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                con.Close();
+                Console.WriteLine("The No of persons in the Each city are ");
+                foreach (DataRow dr in dt.Rows)
+                {
+                     Console.WriteLine(Convert.ToString(dr["city"]));
+                     Console.WriteLine(Convert.ToString(dr["count"]));
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal void GetStateSize()
+        {
+            try
+            {
+                Connection();
+                SqlCommand com = new SqlCommand("CountinState", con);
+                com.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                int i = com.ExecuteNonQuery();
+                List<AddressBook> contacts = new List<AddressBook>();
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                con.Close();
+                Console.WriteLine("The No of persons in the Each city are ");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Console.WriteLine(Convert.ToString(dr["state"]));
+                    Console.WriteLine(Convert.ToString(dr["count"]));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

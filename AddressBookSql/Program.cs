@@ -22,8 +22,10 @@ namespace AddressBookSql
                 Email = "azasf@gmail.com"
             };
             //operation.UpdateDetails(book);
-            operation.GroupByCity();
-            operation.GroupByState();
+            //operation.GroupByCity();
+            //operation.GroupByState();
+            operation.GetCitySize();
+            operation.GetStateSize();
         }
     }
 }
