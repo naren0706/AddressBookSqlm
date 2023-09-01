@@ -136,6 +136,7 @@ namespace AddressBookSql
                 con.Close();
             }
         }
+<<<<<<< HEAD
 
         internal void GroupByCity()
         {
@@ -175,10 +176,14 @@ namespace AddressBookSql
         }
 
         internal void GetCitySize()
+=======
+        public void DeleteContact(string firstName)
+>>>>>>> 165f2e0f1c5d9138c807d9ade038cce6758dbb16
         {
             try
             {
                 Connection();
+<<<<<<< HEAD
                 SqlCommand com = new SqlCommand("CountinCity", con);
                 com.CommandType = CommandType.StoredProcedure;
                 con.Open();
@@ -225,6 +230,14 @@ namespace AddressBookSql
                     Console.WriteLine(Convert.ToString(dr["state"]));
                     Console.WriteLine(Convert.ToString(dr["count"]));
                 }
+=======
+                SqlCommand com = new SqlCommand("DeleteContactDetails", con);
+                com.CommandType = CommandType.StoredProcedure;
+                com.Parameters.AddWithValue("@firstName", firstName);
+                con.Open();
+                int i = com.ExecuteNonQuery();
+                Console.WriteLine("Database Deleted");
+>>>>>>> 165f2e0f1c5d9138c807d9ade038cce6758dbb16
             }
             catch (Exception ex)
             {
