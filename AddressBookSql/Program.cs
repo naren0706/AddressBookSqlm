@@ -24,8 +24,11 @@ namespace AddressBookSql
             //operation.UpdateDetails(book);
             //operation.GroupByCity();
             //operation.GroupByState();
-            //operation.SameCityDetails("Chennai");
-            operation.DeleteContact("name2");
+
+            ////operation.SameCityDetails("Chennai");
+            //operation.DeleteContact("name2");
+            operation.GetCitySize();
+            operation.GetStateSize();
         }
     }
 }
