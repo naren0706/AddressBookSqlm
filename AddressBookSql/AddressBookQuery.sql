@@ -57,6 +57,27 @@ End
 create procedure GroupByCity
 as
 begin
-select * from address_book group by city;
+Select city , count(*) as count from address_book  group by city;
 End
 
+create procedure GroupByState
+as
+begin
+Select state , count(*) as count from address_book  group by State;
+End
+
+create Procedure DetailsinCity(
+@city varchar(20)
+)
+As
+Begin 
+Select * from address_book where city=@city
+End
+
+alter Procedure DetailsinState(
+@state varchar(20)
+)
+As
+Begin 
+Select * from address_book where State=@state
+End
