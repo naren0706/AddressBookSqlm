@@ -193,14 +193,24 @@ namespace AddressBookSql
                 Console.WriteLine(" Count : " + Convert.ToString(dr["count"]));
             }
         }
+<<<<<<< HEAD
         public void SameCityDetails(string city)
+=======
+
+        internal void GetCitySize()
+>>>>>>> UC7-StateNCitySize
         {
             try
             {
                 Connection();
+<<<<<<< HEAD
                 SqlCommand com = new SqlCommand("DetailsinCity", con);
                 com.CommandType = CommandType.StoredProcedure;
                 com.Parameters.AddWithValue("@city", city);
+=======
+                SqlCommand com = new SqlCommand("CountinCity", con);
+                com.CommandType = CommandType.StoredProcedure;
+>>>>>>> UC7-StateNCitySize
                 con.Open();
                 int i = com.ExecuteNonQuery();
                 List<AddressBook> contacts = new List<AddressBook>();
@@ -208,6 +218,7 @@ namespace AddressBookSql
                 DataTable dt = new DataTable();
                 da.Fill(dt);
                 con.Close();
+<<<<<<< HEAD
                 foreach (DataRow dr in dt.Rows)
                 {
                     contacts.Add(
@@ -227,11 +238,52 @@ namespace AddressBookSql
                 foreach (var data in contacts)
                 {
                     Console.WriteLine(data.FirstName + " " + data.LastName);
+=======
+                Console.WriteLine("The No of persons in the Each city are ");
+                foreach (DataRow dr in dt.Rows)
+                {
+                     Console.WriteLine(Convert.ToString(dr["city"]));
+                     Console.WriteLine(Convert.ToString(dr["count"]));
                 }
             }
             catch (Exception ex)
             {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        internal void GetStateSize()
+        {
+            try
+            {
+                Connection();
+                SqlCommand com = new SqlCommand("CountinState", con);
+                com.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                int i = com.ExecuteNonQuery();
+                List<AddressBook> contacts = new List<AddressBook>();
+                SqlDataAdapter da = new SqlDataAdapter(com);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                con.Close();
+                Console.WriteLine("The No of persons in the Each city are ");
+                foreach (DataRow dr in dt.Rows)
+                {
+                    Console.WriteLine(Convert.ToString(dr["state"]));
+                    Console.WriteLine(Convert.ToString(dr["count"]));
+>>>>>>> UC7-StateNCitySize
+                }
+            }
+            catch (Exception ex)
+            {
+<<<<<<< HEAD
                 Console.WriteLine("the error message is : ");
+=======
+>>>>>>> UC7-StateNCitySize
                 throw new Exception(ex.Message);
             }
             finally
